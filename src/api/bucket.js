@@ -398,7 +398,8 @@ proto._requestBucketParams = function(method, options) {
     const params = {
         pathname: `/${this.options.bucket}`,
         method: method,
-        body: options.body
+        body: options.body,
+        timeout: options.timeout
     };
 
     if (options.headers) {

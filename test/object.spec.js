@@ -42,13 +42,9 @@ describe('test object', function() {
             fs.writeFileSync(filePath, JSON.stringify(o));
 
             let stream = fs.createReadStream(filePath);
-            try {
-                let { code } = await this.MSS.putObject(key, stream);
-                equal(code, 200);
-                this.objects.push(key);
-            } catch (e){
-                new Error(e);
-            }
+            let { code } = await this.MSS.putObject(key, stream);
+            equal(code, 200);
+            this.objects.push(key);
         });
 
         it('put multipart object', async function() {
@@ -62,6 +58,7 @@ describe('test object', function() {
             fs.writeFileSync(filePath, JSON.stringify(o));
 
             let { code, data } = await this.MSS.multipartUpload(key, filePath, {
+                timeout: 60000,
                 progress: async(p, checkpoint) => {
                     console.log('progress:', p);
                     let result = await this.MSS.getParts('test.json', checkpoint.uploadId);
