@@ -42,11 +42,13 @@ describe('test object', function() {
             fs.writeFileSync(filePath, JSON.stringify(o));
 
             let stream = fs.createReadStream(filePath);
-            let { code } = await this.MSS.putObject(key, stream);
-
-            equal(code, 200);
-
-            this.objects.push(key);
+            try {
+                let { code } = await this.MSS.putObject(key, stream);
+                equal(code, 200);
+                this.objects.push(key);
+            } catch (e){
+                new Error(e);
+            }
         });
 
         it('put multipart object', async function() {
@@ -66,10 +68,10 @@ describe('test object', function() {
                     equal(result.code, 200);
 
                     let result1 = await this.MSS.getParts('test.json', 'not exit uploadId');
-                    equal(result1.code, 403);
+                    equal(result1.code, 404);
 
                     let result2 = await this.MSS.closeMultipartUpload('test.json', 'not exit uploadId');
-                    equal(result2.code, 403);
+                    equal(result2.code, 404);
                 }
             });
 
