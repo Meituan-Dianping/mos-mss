@@ -8,6 +8,7 @@ let config = require('./config');
 let dataParam = require('./dataParam');
 
 describe('test bucket', function() {
+    this.timeout(60000);
     before(async function() {
         this.MSS = new MSS(config);
         this.bucket = 'mos-mss-test-bucket';
