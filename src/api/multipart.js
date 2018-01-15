@@ -58,7 +58,7 @@ proto._resumeMultipart = async function(checkpoint, options) {
             size: pi.end - pi.start
         };
 
-        const result = await this._uploadPart(fileName, uploadId, partStart, data);
+        const result = await this._uploadPart(fileName, uploadId, partStart, data, options);
         const { headers } = result.res;
         if (result.code === 500) {
             throw Error(result.error);
