@@ -8,6 +8,7 @@ let equal = assert.equal;
 let config = require('./config');
 
 describe('test object', function() {
+    this.timeout(60000);
     before(async function() {
         this.MSS = new MSS(config);
         this.bucket = 'mos-mss-test-object-bucket';
@@ -50,7 +51,6 @@ describe('test object', function() {
 
         it('put multipart object', async function() {
             let key = 'test-multipart';
-            this.timeout(60000);
 
             let o = {};
             for (let i = 0; i < 350000; i++) {
