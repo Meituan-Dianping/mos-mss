@@ -29,9 +29,9 @@
   ],
   "author": "Meituan Storage Service",
   "bugs": {
-    "url": "https://github.com/meituan/mos-mss/issues"
+    "url": "https://github.com/Meituan-Dianping/mos-mss/issues"
   },
-  "homepage": "https://github.com/meituan/mos-mss#readme",
+  "homepage": "https://github.com/Meituan-Dianping/mos-mss",
   "dependencies": {
     "content-type": "^1.0.4",
     "merge-descriptors": "^1.0.1",
