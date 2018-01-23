@@ -397,15 +397,14 @@ proto._requestBucketParams = function(method, options) {
     options = options || {};
     const params = {
         pathname: `/${this.options.bucket}`,
-        method: method,
-        body: options.body
+        method: method
     };
 
-    if (options.headers) {
-        params.headers = options.headers;
+    for (let key in params) {
+        options[key] = params[key];
     }
 
-    return params;
+    return options;
 };
 
 proto.use = function(name, region) {
