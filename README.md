@@ -68,7 +68,7 @@ options:
     - [getObject(key, path[, options])](#getobjectkey-path-options)
     - [getBuffer(key[, options])](#getbufferkey-options)
     - [getStream(key[, options])](#getstreamkey-options)
-    - [listObject([options])](#listobject-options)
+    - [listObject([options])](#listobjectoptions)
     - [copyObject(from, to[, options])](#copyobjectfrom-to-options)
     - [getMeta(key[, options])](#getmetakey-options)
     - [deleteObject(key[, options])](#deleteobjectkey-options)
@@ -256,7 +256,7 @@ Return:
 	- data (Object) — the de-serialized data returned from the request. The default is ```{}```.
 	- error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
-### getBucket(name[,options])
+### getBucket(name[, options])
 
 This operation is useful to determine if a bucket exists and you have permission to access it.mos
 
