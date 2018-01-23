@@ -15,11 +15,12 @@ const builder = new xml2js.Builder();
 const debug = debuglog('mos-mss');
 const proto = exports;
 
-proto.getObject = async function(fileName, file) {
+proto.getObject = async function(fileName, file, options) {
+    options = options || {};
     return new Promise(async(resolve) => {
         const writeStream = fs.createWriteStream(file);
 
-        const { stream } = await this.getStream(fileName);
+        const { stream } = await this.getStream(fileName, options);
         stream.pipe(writeStream);
         stream.on('error', function(err) {
             resolve({
@@ -140,8 +141,8 @@ proto.getStream = async function(ObjectKey, options) {
     return result;
 };
 
-proto.listObject = async function() {
-    const params = this._requestParams('GET');
+proto.listObject = async function(options) {
+    const params = this._requestParams('GET', null, options);
     const result = await this.request(params);
     const { code } = result;
     const { body } = result.res;
@@ -325,15 +326,14 @@ proto._requestParams = function(method, name, options) {
     name = name && this._replaceChart(name) || '';
     const params = {
         pathname: `/${this.options.bucket}/${name}`,
-        method: method,
-        body: options.body
+        method: method
     };
 
-    if (options.headers) {
-        params.headers = options.headers;
+    for (let key in params) {
+        options[key] = params[key];
     }
 
-    return params;
+    return options;
 };
 
 proto._replaceChart = function(name) {
