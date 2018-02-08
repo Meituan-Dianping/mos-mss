@@ -63,9 +63,9 @@ proto.listBucket = async function() {
             data.Owner = this.keyValueObject(Owner);
         }
         if (Buckets) {
-            data.Buckets = Buckets.Bucket.map((item) => {
+            data.Buckets = Array.isArray(Buckets.Bucket) ? Buckets.Bucket.map((item) => {
                 return this.keyValueObject(item);
-            });
+            }) : [this.keyValueObject(Buckets.Bucket)];
         }
     }
 
