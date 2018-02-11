@@ -153,7 +153,7 @@ proto.listObject = async function(options) {
         result.error = this.keyValueObject(body);
     } else {
         data = this.keyValueObject(body);
-        data.Contents = Contents ? Contents.map((item) => {
+        data.Contents = Contents ? (Array.isArray(Contents) ? Contents : [Contents]).map((item) => {
             return this.keyValueObject(item);
         }) : [];
     }
