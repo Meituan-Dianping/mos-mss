@@ -598,7 +598,7 @@ var result = client.putBucketCors('Bucket', {
     CORSConfiguration: {
         CORSRule: [
             {
-                AllowedMethods: [
+                AllowedMethod: [
                     'GET',
                 /* more items */
                 ],
