@@ -11,7 +11,7 @@ var result = client.putBucketCors('test-bucket', {
     CORSConfiguration: {
         CORSRule: [
             {
-                AllowedMethods: [
+                AllowedMethod: [
                     'GET'
 
                 /* more items */
