@@ -598,7 +598,7 @@ var result = client.putBucketCors('Bucket', {
     CORSConfiguration: {
         CORSRule: [
             {
-                AllowedMethods: [
+                AllowedMethod: [
                     'GET',
                 /* more items */
                 ],
@@ -629,9 +629,9 @@ Parameters:
 - options (Object)
     - CorsConfiguration — (map)
         - CORSRule — required — (Array<map>)
-            - AllowedHeaders — (Array<String>) Specifies which headers are allowed in a pre-flight OPTIONS request.
-            - AllowedMethods — required — (Array<String>) Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
-            - AllowedOrigins — required — (Array<String>) One or more origins you want customers to be able to access the bucket from.
+            - AllowedHeader — (Array<String>) Specifies which headers are allowed in a pre-flight OPTIONS request.
+            - AllowedMethod — required — (Array<String>) Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
+            - AllowedOrigin — required — (Array<String>) One or more origins you want customers to be able to access the bucket from.
             - MaxAgeSeconds — (Integer) The time in seconds that your browser is to cache the preflight response for the specified resource.
 
 Return:
