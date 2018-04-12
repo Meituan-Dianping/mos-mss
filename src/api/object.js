@@ -290,10 +290,10 @@ proto.signatureUrl = async function(objectkey, options) {
     const expires = Math.round(new Date().getTime() / 1000) + (options.expires || 1800);
 
     const arr = [];
-    for(let key in options.query) {
+    for (let key in options.query) {
         arr.push(key + '=' + options.query[key]);
     }
-    const queryStr = arr.join('&');
+    const queryStr = arr.sort((a, b) => { return a < b ? -1 : 1; }).join('&');
 
     const resource = '/' + this.options.bucket + '/' + objectkey;
 
@@ -302,9 +302,8 @@ proto.signatureUrl = async function(objectkey, options) {
         options['content-md5'] || '',
         options['content-type'] || '',
         expires,
-        queryStr ? resource  + '?' + queryStr : resource
+        queryStr ? resource + '?' + queryStr : resource
     ].join('\n');
-
 
     const signature = this.signature(stringToSign);
     const query = Object.assign({}, {

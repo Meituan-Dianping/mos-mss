@@ -10,8 +10,10 @@ var client = new MSS({
 
 var result = client.signatureUrl('test-buffer.json', {
     protocol: 'https',
+    endpoint: 'msstest-corp.sankuai.com',
     query: {
-        'response-content-type': 'json'
+        'response-content-type': 'json',
+        'response-content-disposition': 'disposition'
     }
 });
 
