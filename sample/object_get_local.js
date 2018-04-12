@@ -12,7 +12,11 @@ var client = new MSS({
     bucket: 'test-bucket'
 });
 
-var result = client.getObject('test-buffer.json', path.join(__dirname, './data/test-download.json'));
+var result = client.getObject('test-buffer.json', path.join(__dirname, './data/test-download.json'), {
+    query: {
+        'response-content-type': 'json'
+    }
+});
 
 result.then(function(data) {
     console.log(data);
