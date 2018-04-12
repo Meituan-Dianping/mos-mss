@@ -285,27 +285,40 @@ proto.signature = function(stringToSign) {
 
 proto.signatureUrl = async function(objectkey, options) {
     options = options || {};
+
+    options.endpoint = options.endpoint || this.options.endpoint;
     const expires = Math.round(new Date().getTime() / 1000) + (options.expires || 1800);
+
+    const arr = [];
+    for(let key in options.query) {
+        arr.push(key + '=' + options.query[key]);
+    }
+    const queryStr = arr.join('&');
+
     const resource = '/' + this.options.bucket + '/' + objectkey;
+
     const stringToSign = [
         options.method || 'GET',
         options['content-md5'] || '',
         options['content-type'] || '',
         expires,
-        resource
+        queryStr ? resource  + '?' + queryStr : resource
     ].join('\n');
+
+
     const signature = this.signature(stringToSign);
-    const query = {
+    const query = Object.assign({}, {
         AWSAccessKeyId: this.options.accessKeyId,
         Expires: expires,
         Signature: signature
-    };
+    }, options.query);
+
     const protocol = options.protocol || 'http';
     let pathUrl = url.format({
         protocol,
         query,
         auth: false,
-        hostname: this.options.endpoint,
+        hostname: options.endpoint,
         pathname: resource
     });
 
@@ -325,7 +338,7 @@ proto._requestParams = function(method, name, options) {
     options = options || {};
     name = name && this._replaceChart(name) || '';
     const params = {
-        pathname: `/${this.options.bucket}/${name}`,
+        pathname: `/${this.options.bucket}/${encodeURI(name)}`,
         method: method
     };
 
