@@ -41,7 +41,7 @@ function createRequest(params) {
     headers = headers ? headers : {};
     headers['Host'] = url.hostname;
     headers['Content-Type'] = headers['Content-Type'] ? headers['Content-Type'] : 'application/octet-stream';
-    headers['User-Agent'] = 'mss-superagent-nodejs';
+    headers['User-Agent'] = 'beam-mss-nodejs';
 
     const authorizationR = {
         headers,
