@@ -1,4 +1,4 @@
-var MSS = require('../src'
+var MSS = require('../src');
 
 var { accessKeyId, accessKeySecret } = require('./config/server.js');
 

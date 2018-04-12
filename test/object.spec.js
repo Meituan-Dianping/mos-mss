@@ -51,6 +51,14 @@ describe('test object', function() {
             }
         });
 
+        it('put object for Chinese key', async function() {
+            let key = '测试key';
+            let result = await this.MSS.putObject(key, new Buffer('test'));
+            equal(result.code, 200);
+
+            this.objects.push(key);
+        });
+
         it('put multipart object', async function() {
             let key = 'test-multipart';
 
@@ -93,6 +101,11 @@ describe('test object', function() {
     describe('getObject()', function() {
         it('get object by buffer success', async function() {
             let { code } = await this.MSS.getBuffer('test.txt');
+            equal(code, 200);
+        });
+
+        it('get object  for Chinese key', async function() {
+            let { code } = await this.MSS.getBuffer('测试key');
             equal(code, 200);
         });
 
@@ -208,6 +221,15 @@ describe('test object', function() {
     describe('signatureUrl()', async function() {
         it('use signatureUrl should be successful', async function() {
             let { code } = await this.MSS.signatureUrl('test.json');
+            equal(code, 200);
+        });
+
+        it('use signatureUrl by query', async function() {
+            let { code } = await this.MSS.signatureUrl('test.json', {
+                query: {
+                    'response-content-type': 'json'
+                }
+            });
             equal(code, 200);
         });
     });

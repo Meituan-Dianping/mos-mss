@@ -716,6 +716,8 @@ Parameters:
 
 - key (String) — object name.
 - file (String|Buffer|ReadStream) object local path, content buffer or ReadStream content.
+- options (Object)
+    - headers (Object) extra headers.
 
 Return:
 
@@ -757,6 +759,8 @@ Parameters:
 
 - key (String) — object name.
 - file (ReadStream) ReadStream content.
+- options (Object)
+    - headers (Object) extra headers.
 
 Return:
 
@@ -834,7 +838,8 @@ Parameters:
 - options (Object)
     - partSize (Number) — the suggested size for each part.
     - checkpoint (Object) — the checkpoint to resume upload.
-    
+    - headers (Object) extra headers.
+
 Return:
 
 - res (Object)
@@ -942,6 +947,15 @@ Parameters:
 
 - key (String) — object name.
 - path (String) - object local path.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -973,6 +987,15 @@ result.then(function (res) {
 Parameters:
 
 - key (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -1015,6 +1038,15 @@ result.then(function (data) {
 Parameters:
 
 - key (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -1234,6 +1266,15 @@ result.then(function (res) {
 Parameters:
 
 - name (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
