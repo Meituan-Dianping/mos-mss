@@ -110,6 +110,9 @@ proto.putStream = async function(fileName, stream, options) {
 };
 
 proto.getBuffer = async function(ObjectKey, options) {
+    if (ObjectKey.length === 0) {
+        throw new Error('ObjectKey 不能为空');
+    }
     options = options || {};
     const method = options.method || 'GET';
     const params = this._requestParams(method, ObjectKey, options);
@@ -132,6 +135,9 @@ proto.getBuffer = async function(ObjectKey, options) {
 };
 
 proto.getStream = async function(ObjectKey, options) {
+    if (ObjectKey.length === 0) {
+        throw new Error('ObjectKey 不能为空');
+    }
     options = options || {};
     const method = options.method || 'GET';
     const params = this._requestParams(method, ObjectKey, options);
