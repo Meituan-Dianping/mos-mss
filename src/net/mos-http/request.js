@@ -105,7 +105,7 @@ Request.prototype.start = function() {
         this.req = httpServer.request(opts);
         this.req.setTimeout(this.timeout || TIMEOUT, () => {
             this.req.abort();
-            this.callback(new Error('TimeoutError'));
+            throw new Error('TimeoutError');
         });
     } catch (e) {
         this.callback(new Error(e));
