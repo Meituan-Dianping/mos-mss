@@ -1,6 +1,6 @@
 {
   "name": "mos-mss",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "mtyun MSS(Meituan Storage Service) sdk for Node.js",
   "main": "src/index.js",
   "files": [
