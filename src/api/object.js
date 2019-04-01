@@ -28,7 +28,7 @@ proto.getObject = async function(fileName, file, options) {
                 error: err
             });
         });
-        stream.on('end', function() {
+        writeStream.on('finish', function() {
             resolve({
                 code: 200,
                 error: null,
