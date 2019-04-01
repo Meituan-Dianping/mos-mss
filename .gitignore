@@ -1,2 +1,8 @@
-	.DS_Store
-	node_modules/
+node_modules
+log
+sample/data/*.json
+test/data/*.json
+npm-debug.log
+coverage/
+.DS_Store
+package-lock.json
