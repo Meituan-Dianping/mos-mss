@@ -15,11 +15,12 @@ const builder = new xml2js.Builder();
 const debug = debuglog('mos-mss');
 const proto = exports;
 
-proto.getObject = async function(fileName, file) {
+proto.getObject = async function(fileName, file, options) {
+    options = options || {};
     return new Promise(async(resolve) => {
         const writeStream = fs.createWriteStream(file);
 
-        const { stream } = await this.getStream(fileName);
+        const { stream } = await this.getStream(fileName, options);
         stream.pipe(writeStream);
         stream.on('error', function(err) {
             resolve({
@@ -140,8 +141,8 @@ proto.getStream = async function(ObjectKey, options) {
     return result;
 };
 
-proto.listObject = async function() {
-    const params = this._requestParams('GET');
+proto.listObject = async function(options) {
+    const params = this._requestParams('GET', null, options);
     const result = await this.request(params);
     const { code } = result;
     const { body } = result.res;
@@ -152,7 +153,7 @@ proto.listObject = async function() {
         result.error = this.keyValueObject(body);
     } else {
         data = this.keyValueObject(body);
-        data.Contents = Contents ? Contents.map((item) => {
+        data.Contents = Contents ? (Array.isArray(Contents) ? Contents : [Contents]).map((item) => {
             return this.keyValueObject(item);
         }) : [];
     }
@@ -284,27 +285,39 @@ proto.signature = function(stringToSign) {
 
 proto.signatureUrl = async function(objectkey, options) {
     options = options || {};
+
+    options.endpoint = options.endpoint || this.options.endpoint;
     const expires = Math.round(new Date().getTime() / 1000) + (options.expires || 1800);
+
+    const arr = [];
+    for (let key in options.query) {
+        arr.push(key + '=' + options.query[key]);
+    }
+    const queryStr = arr.sort((a, b) => { return a < b ? -1 : 1; }).join('&');
+
     const resource = '/' + this.options.bucket + '/' + objectkey;
+
     const stringToSign = [
         options.method || 'GET',
         options['content-md5'] || '',
         options['content-type'] || '',
         expires,
-        resource
+        queryStr ? resource + '?' + queryStr : resource
     ].join('\n');
+
     const signature = this.signature(stringToSign);
-    const query = {
+    const query = Object.assign({}, {
         AWSAccessKeyId: this.options.accessKeyId,
         Expires: expires,
         Signature: signature
-    };
+    }, options.query);
+
     const protocol = options.protocol || 'http';
     let pathUrl = url.format({
         protocol,
         query,
         auth: false,
-        hostname: this.options.endpoint,
+        hostname: options.endpoint,
         pathname: resource
     });
 
@@ -324,17 +337,15 @@ proto._requestParams = function(method, name, options) {
     options = options || {};
     name = name && this._replaceChart(name) || '';
     const params = {
-        pathname: `/${this.options.bucket}/${name}`,
-        method: method,
-        body: options.body,
-        timeout: options.timeout
+        pathname: `/${this.options.bucket}/${encodeURI(name)}`,
+        method: method
     };
 
-    if (options.headers) {
-        params.headers = options.headers;
+    for (let key in params) {
+        options[key] = params[key];
     }
 
-    return params;
+    return options;
 };
 
 proto._replaceChart = function(name) {

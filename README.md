@@ -44,19 +44,19 @@ options:
 
 
 - [Bucket Operations](#bucket-operations)
-    - [listBucket(query[, options])](#listbucketquery-options)
+    - [listBucket()](#listbucket)
     - [createBucket(name[, options])](#createbucketname-options)
     - [deleteBucket(name[, options])](#deletebucketname-options)
     - [getBucketACL(name[, options])](#getbucketaclname-options)
     - [putBucketACL(name, ACL[, options])](#putbucketaclname-acl-options)
-    - [getBucket(name, ACL[, options])](#getbucketname-acl-options)
+    - [getBucket(name[, options])](#getbucketname-options)
     - [getBucketLifecycle(name[, options])](#getbucketlifecyclename-options)
-    - [putBucketLifecycle(name, lifecycleConfiguration[, options])](#putbucketlifecyclename-lifecycleconfiguration-options)
+    - [putBucketLifecycle(name[, options])](#putbucketlifecyclename-options)
     - [deleteBucketLifecycle(name,[ options])](#deletebucketlifecyclename-options)
     - [getBucketPolicy(name[, options])](#getbucketpolicyname-options)
-    - [putBucketPolicy(name,policy[, options])](#putbucketpolicyname-policy-options)
+    - [putBucketPolicy(name[, options])](#putbucketpolicyname-options)
     - [getBucketCors(name[, options])](#getbucketcorsname-options)
-    - [putBucketCors(name, CorsConfiguration[, options])](#putbucketcorsname-corsconfiguration-options)
+    - [putBucketCors(name[, options])](#putbucketcorsname-options)
     - [deleteBucketCors(name[, options])](#deletebucketcorsname-options)
 
 - [Object Operations](#object-operations)
@@ -65,10 +65,10 @@ options:
     - [multipartUpload(key, file[, options])](#multipartuploadkey-file-options)
     - [closeMultipartUpload(key, uploadId)](#closemultipartuploadkey-uploadid)
     - [getParts(key, uploadId)](#getpartskey-uploadid)
-    - [getObject(key[, options])](#getobjectkey-options)
+    - [getObject(key, path[, options])](#getobjectkey-path-options)
     - [getBuffer(key[, options])](#getbufferkey-options)
     - [getStream(key[, options])](#getstreamkey-options)
-    - [listObject()](#listobject)
+    - [listObject([options])](#listobjectoptions)
     - [copyObject(from, to[, options])](#copyobjectfrom-to-options)
     - [getMeta(key[, options])](#getmetakey-options)
     - [deleteObject(key[, options])](#deleteobjectkey-options)
@@ -76,7 +76,7 @@ options:
  
 ## Bucket Operations
  
-### listBucket(query[, options])
+### listBucket()
 
 Returns a list of all buckets owned by the authenticated sender of the request.
 
@@ -203,10 +203,10 @@ Parameters:
 Return:
 
 - res (Object)
-	- code (Number) — the code number returned from the request. The request is successful when the number is 200.
-	- data (Object) — the de-serialized data returned from the request. The default is ```{}```. Set to ```{}``` if a request error occurs. The data object has the following properties:
-		- Owner (Object)
-			- DisplayName — (String) Screen name of the grantee.
+    - code (Number) — the code number returned from the request. The request is successful when the number is 200.
+    - data (Object) — the de-serialized data returned from the request. The default is ```{}```. Set to ```{}``` if a request error occurs. The data object has the following properties:
+        - Owner (Object)
+        - DisplayName — (String) Screen name of the grantee.
 			- ID — (String) The canonical user ID of the grantee.
 		- Grants — (Array) A list of grants.
 			- Grantee
@@ -256,7 +256,7 @@ Return:
 	- data (Object) — the de-serialized data returned from the request. The default is ```{}```.
 	- error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
-### getBucket(name)
+### getBucket(name[, options])
 
 This operation is useful to determine if a bucket exists and you have permission to access it.mos
 
@@ -344,7 +344,7 @@ Return:
                 - DaysAfterInitiation — (Integer) Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
     - error (Object) — the error object returned from the request. Set to ``null`` if the request is successful.
 
-### putBucketLifecycle(name, lifecycleConfiguration[, options])
+### putBucketLifecycle(name[, options])
 
 Set the bucket object lifecycle.
 
@@ -382,33 +382,33 @@ result.then(function (res) {
 Parameters:
 
 - name (String) Bucket name.
-
-- lifecycleConfiguration — (map)
-    - Rule — required — (Array<map>)
-        - Expiration — (map)
-            - Date — (Date) Indicates at what date the object is to be moved or deleted.Should be in GMT ISO 8601 Format.
-            - Days — (Integer) Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
-            - ExpiredObjectDeleteMarker — (Boolean) Indicates whether mos S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
-        - ID — (String) Unique identifier for the rule. The value cannot be longer than 255 characters.
-        - Prefix — required — (String) Prefix identifying one or more objects to which the rule applies.
-        - Status — required — (String) If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied. Possible values include:
-            - "Enabled"
-            - "Disabled"
-        - Transition — (map)
-            - Date — (Date) Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
-            - Days — (Integer) Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+- options (Object)
+    - lifecycleConfiguration — (map)
+        - Rule — required — (Array<map>)
+            - Expiration — (map)
+                - Date — (Date) Indicates at what date the object is to be moved or deleted.Should be in GMT ISO 8601 Format.
+                - Days — (Integer) Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+                - ExpiredObjectDeleteMarker — (Boolean) Indicates whether mos S3 will remove a delete marker with no noncurrent versions. If set to true, the delete marker will be expired; if set to false the policy takes no action. This cannot be specified with Days or Date in a Lifecycle Expiration Policy.
+            - ID — (String) Unique identifier for the rule. The value cannot be longer than 255 characters.
+            - Prefix — required — (String) Prefix identifying one or more objects to which the rule applies.
+            - Status — required — (String) If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied. Possible values include:
+                - "Enabled"
+                - "Disabled"
+            - Transition — (map)
+                - Date — (Date) Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+                - Days — (Integer) Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+                - StorageClass — (String) The class of storage used to store the object. Possible values include:
+                    - "GLACIER"
+                    - "STANDARD_IA"
+            - NoncurrentVersionTransition — (map) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that mos S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object's lifetime.
+            - NoncurrentDays — (Integer) Specifies the number of days an object is noncurrent before mos S3 can perform the associated action. For information about the noncurrent days calculations, see How mos S3 Calculates When an Object Became Noncurrent in the mos Simple Storage Service Developer Guide.
             - StorageClass — (String) The class of storage used to store the object. Possible values include:
                 - "GLACIER"
                 - "STANDARD_IA"
-        - NoncurrentVersionTransition — (map) Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA or GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that mos S3 transition noncurrent object versions to the STANDARD_IA or GLACIER storage class at a specific period in the object's lifetime.
-        - NoncurrentDays — (Integer) Specifies the number of days an object is noncurrent before mos S3 can perform the associated action. For information about the noncurrent days calculations, see How mos S3 Calculates When an Object Became Noncurrent in the mos Simple Storage Service Developer Guide.
-        - StorageClass — (String) The class of storage used to store the object. Possible values include:
-            - "GLACIER"
-            - "STANDARD_IA"
-        - NoncurrentVersionExpiration — (map) Specifies when noncurrent object versions expire. Upon expiration, mos S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that mos S3 delete noncurrent object versions at a specific period in the object's lifetime.
-        - NoncurrentDays — (Integer) Specifies the number of days an object is noncurrent before mos S3 can perform the associated action. For information about the noncurrent days calculations, see How mos S3 Calculates When an Object Became Noncurrent in the mos Simple Storage Service Developer Guide.
-        - AbortIncompleteMultipartUpload — (map) Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
-        - DaysAfterInitiation — (Integer) Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
+            - NoncurrentVersionExpiration — (map) Specifies when noncurrent object versions expire. Upon expiration, mos S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that mos S3 delete noncurrent object versions at a specific period in the object's lifetime.
+            - NoncurrentDays — (Integer) Specifies the number of days an object is noncurrent before mos S3 can perform the associated action. For information about the noncurrent days calculations, see How mos S3 Calculates When an Object Became Noncurrent in the mos Simple Storage Service Developer Guide.
+            - AbortIncompleteMultipartUpload — (map) Specifies the days since the initiation of an Incomplete Multipart Upload that Lifecycle will wait before permanently removing all parts of the upload.
+            - DaysAfterInitiation — (Integer) Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
 
 Return:
 
@@ -481,7 +481,7 @@ Return:
 	- error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
 
-### putBucketPolicy(name, policy[, options])
+### putBucketPolicy(name[, options])
 
 Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.
 
@@ -540,7 +540,8 @@ Parameters:
 
 - name (String) Bucket name.
 
-- policy — (String) The bucket policy as a JSON document.
+- options (Object)
+    - policy — (Object) The bucket policy as a JSON document.
 
 Return:
 
@@ -581,7 +582,7 @@ Return:
 			- AllowedOrigins — required — (Array<String>) One or more origins you want customers to be able to access the bucket from.
 	- error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
-### putBucketCors(name, CorsConfiguration[, options])
+### putBucketCors(name[, options])
 Sets the cors configuration for a bucket.
 
 Examples:
@@ -597,7 +598,7 @@ var result = client.putBucketCors('Bucket', {
     CORSConfiguration: {
         CORSRule: [
             {
-                AllowedMethods: [
+                AllowedMethod: [
                     'GET',
                 /* more items */
                 ],
@@ -625,19 +626,20 @@ result.then(function (res) {
 Parameters:
 
 - name (String) Bucket name.
-- CorsConfiguration — (map)
-	- CORSRule — required — (Array<map>)
-		- AllowedHeaders — (Array<String>) Specifies which headers are allowed in a pre-flight OPTIONS request.
-		- AllowedMethods — required — (Array<String>) Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
-		- AllowedOrigins — required — (Array<String>) One or more origins you want customers to be able to access the bucket from.
-		- MaxAgeSeconds — (Integer) The time in seconds that your browser is to cache the preflight response for the specified resource.
+- options (Object)
+    - CorsConfiguration — (map)
+        - CORSRule — required — (Array<map>)
+            - AllowedHeader — (Array<String>) Specifies which headers are allowed in a pre-flight OPTIONS request.
+            - AllowedMethod — required — (Array<String>) Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
+            - AllowedOrigin — required — (Array<String>) One or more origins you want customers to be able to access the bucket from.
+            - MaxAgeSeconds — (Integer) The time in seconds that your browser is to cache the preflight response for the specified resource.
 
 Return:
 
 - res (Object)
-	- code (Number) — the code number returned from the request. The request is successful when the number is 200.
-	- data (Object) - the de-serialized data returned from the request. The default is ```{}```.
-	- error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
+    - code (Number) — the code number returned from the request. The request is successful when the number is 200.
+    - data (Object) - the de-serialized data returned from the request. The default is ```{}```.
+    - error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
 ### deleteBucketCors(name[, options])
 Deletes the cors configuration information set for the bucket.
@@ -714,6 +716,8 @@ Parameters:
 
 - key (String) — object name.
 - file (String|Buffer|ReadStream) object local path, content buffer or ReadStream content.
+- options (Object)
+    - headers (Object) extra headers.
 
 Return:
 
@@ -755,6 +759,8 @@ Parameters:
 
 - key (String) — object name.
 - file (ReadStream) ReadStream content.
+- options (Object)
+    - headers (Object) extra headers.
 
 Return:
 
@@ -832,7 +838,8 @@ Parameters:
 - options (Object)
     - partSize (Number) — the suggested size for each part.
     - checkpoint (Object) — the checkpoint to resume upload.
-    
+    - headers (Object) extra headers.
+
 Return:
 
 - res (Object)
@@ -915,7 +922,7 @@ Return:
 Set to ```{}``` if a request error occurs.
     - error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
-### getObject(key[, options])
+### getObject(key, path[, options])
 Retrieves objects from mos S3.
 
 Examples:
@@ -940,6 +947,15 @@ Parameters:
 
 - key (String) — object name.
 - path (String) - object local path.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -971,6 +987,15 @@ result.then(function (res) {
 Parameters:
 
 - key (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -1013,6 +1038,15 @@ result.then(function (data) {
 Parameters:
 
 - key (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 
@@ -1024,7 +1058,7 @@ Set to ```{}``` if a request error occurs. The data object has the following pro
     - error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
 
-### listObject()
+### listObject([options])
 Returns all of the objects in a bucket. 
 
 Examples:
@@ -1048,6 +1082,8 @@ result.then(function (res) {
 Parameters:
 
 - key (String) — object name.
+- options (Object)
+    - query (Object) query object, see the api list.
 
 Return:
 
@@ -1230,6 +1266,15 @@ result.then(function (res) {
 Parameters:
 
 - name (String) — object name.
+- options (Object)
+    - headers (Object) extra headers.
+    - query (Object)
+        - response-content-type (String) - Sets the Content-Type header of the response.
+        - response-content-language (String) - Sets the Content-Language header of the response.
+        - response-expires (String) - Sets the Expires header of the response.
+        - response-cache-control (String) - Sets the Cache-Control header of the response.
+        - response-content-disposition (String) - Sets the Content-Disposition header of the response.
+        - response-content-encoding (String) - Sets the Content-Encoding header of the response.
 
 Return:
 

@@ -90,7 +90,7 @@ let dataParam = {
         CORSConfiguration: {
             CORSRule: [
                 {
-                    AllowedMethods: [
+                    AllowedMethod: [
                         'GET'
 
                     /* more items */
