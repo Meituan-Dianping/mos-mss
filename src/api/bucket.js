@@ -63,9 +63,9 @@ proto.listBucket = async function() {
             data.Owner = this.keyValueObject(Owner);
         }
         if (Buckets) {
-            data.Buckets = Buckets.Bucket.map((item) => {
+            data.Buckets = Array.isArray(Buckets.Bucket) ? Buckets.Bucket.map((item) => {
                 return this.keyValueObject(item);
-            });
+            }) : [this.keyValueObject(Buckets.Bucket)];
         }
     }
 
@@ -397,16 +397,14 @@ proto._requestBucketParams = function(method, options) {
     options = options || {};
     const params = {
         pathname: `/${this.options.bucket}`,
-        method: method,
-        body: options.body,
-        timeout: options.timeout
+        method: method
     };
 
-    if (options.headers) {
-        params.headers = options.headers;
+    for (let key in params) {
+        options[key] = params[key];
     }
 
-    return params;
+    return options;
 };
 
 proto.use = function(name, region) {
