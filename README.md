@@ -28,9 +28,9 @@ examples:
 var MSS = require('mos-mss');
 
 var client = new MSS({
-    accessKeyId: '<accessKeyId>',
-    accessKeySecret: '<accessKeySecret>',
-    endpoint: '<endpoint>',
+    accessKeyId: '<accessKeyId>', /* required */
+    accessKeySecret: '<accessKeySecret>', /* required */
+    endpoint: '<endpoint>', /* required */
     bucket: '<bucket name>'
 })
 
