@@ -4,7 +4,8 @@
   "description": "mtyun MSS(Meituan Storage Service) sdk for Node.js",
   "main": "src/index.js",
   "files": [
-    "src"
+    "src",
+    "sample"
   ],
   "scripts": {
     "test": "./node_modules/.bin/mocha --recursive test",
