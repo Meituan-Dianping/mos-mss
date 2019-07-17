@@ -1,19 +1,21 @@
 var MSS = require('../src');
 var path = require('path');
 
-var { accessKeyId, accessKeySecret } = require('./config/server.js');
+var { accessKeyId, accessKeySecret, endpoint } = require('./config/server.js');
 
 let client = new MSS({
     accessKeyId,
     accessKeySecret,
-    bucket: 'test-bucket'
+    endpoint,
+    bucket: 'testccc'
 });
 
-var result = client.putObject('test.json', path.join(__dirname, './data/test.json'));
-
-result.then(function(res) {
-    console.log(res);
-});
+for(let i = 0; i < 1005; i++) {
+    var result = client.putObject(i + 'test.json', path.join(__dirname, './data/test.json'));
+    result.then(function(res) {
+        console.log(res);
+    });
+}
 
 /**
 {

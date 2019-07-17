@@ -31,7 +31,8 @@ proto.s3 = function() {
             'versionId': 1,
             'versioning': 1,
             'versions': 1,
-            'website': 1
+            'website': 1,
+            'domain': 1
         },
 
         // when building the stringToSign, these querystring params should be

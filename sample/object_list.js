@@ -1,14 +1,22 @@
 var MSS = require('../src');
 
-var { accessKeyId, accessKeySecret } = require('./config/server.js');
+var { accessKeyId, accessKeySecret, endpoint } = require('./config/server.js');
 
 var client = new MSS({
     accessKeyId,
     accessKeySecret,
-    bucket: 'myBucket'
+    endpoint,
+    bucket: 'testccc'
 });
 
-var result = client.listObject();
+var result = client.listObject({
+    query: {
+        prefix="",
+        marker="",
+        delimiter="/",
+        max_keys=100
+    }
+});
 result.then(function(res) {
     console.log(JSON.stringify(res));
 });
