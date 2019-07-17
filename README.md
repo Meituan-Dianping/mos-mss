@@ -28,17 +28,22 @@ examples:
 var MSS = require('mos-mss');
 
 var client = new MSS({
-    accessKeyId: '<accessKeyId>',
-    accessKeySecret: '<accessKeySecret>'
+    accessKeyId: '<accessKeyId>', /* required */
+    accessKeySecret: '<accessKeySecret>', /* required */
+    endpoint: '<endpoint>', /* required */
+    bucket: '<bucket name>'
 })
 
 ```
 
 options:
 
-- endpoint (String) — The endpoint URI to send requests to. The default endpoint is built from the configured region. The endpoint should be a string like '{service}.{region}.amazonaws.com'.
+- endpoint (String) — The endpoint URI to send requests to. The endpoint should be a string like '{service}.{region}.amazonaws.com'.
 - accessKeyId (String) — your MSS access key ID.
 - accessKeySecret (String) — your MSS secret access key.
+- bucket (String) your Bucket name.
+- secure (Boolean) http(false) or https(true). The default is false.
+- signerVersion (String) singer version v2 or v4. The default is v2.
 
 ## Method Summary
 
@@ -1084,6 +1089,10 @@ Parameters:
 - key (String) — object name.
 - options (Object)
     - query (Object) query object, see the api list.
+        - delimiter (String) - A delimiter is a character you use to group keys.
+        - marker (String) - Specifies the key to start with when listing objects in a bucket.
+        - max-keys (Integer) - Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more.
+        - prefix (String) - Limits the response to keys that begin with the specified prefix.
 
 Return:
 
@@ -1091,6 +1100,10 @@ Return:
     - code (Number) — the code number returned from the request. The request is successful when the number is 200.
     - data (Object) — the de-serialized data returned from the request. The default is ```{}```.
 Set to ```{}``` if a request error occurs. The data object has the following properties:
+        - Name (String) - Bucket name
+        - Prefix (String)
+        - Marker (String)
+        - MaxKeys (Integer)
         - Contents (Array) the list of object.
             - Key (String) — object name on mss.
             - Etag (String) — object etag.
@@ -1098,6 +1111,9 @@ Set to ```{}``` if a request error occurs. The data object has the following pro
             - Size (Number) — object size.
             - StorageClass (String) — storage class type.
             - Owner (Object) — object owner, including ID and DisplayName.
+        - IsTruncated (Boolean) - A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
+        - Delimiter (String)
+        - NextMarker (String) - When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
     - error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
         
