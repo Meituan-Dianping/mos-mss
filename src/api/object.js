@@ -39,11 +39,9 @@ proto.getObject = async function(fileName, file, options) {
 };
 
 proto.putObject = async function(fileName, file, options) {
-    options = options || {
-        headers: {
-            'Content-Type': mime.getType(file)
-        }
-    };
+    options = options || {};
+    options.headers = options.headers || {};
+    options['headers']['Content-Type'] = options['headers']['Content-Type'] || mime.getType(file);
 
     //upload local file
     if (_.isString(file)){
