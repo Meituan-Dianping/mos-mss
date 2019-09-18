@@ -1187,6 +1187,7 @@ Set to ```{}``` if a request error occurs. The data object has the following pro
         - Etag (String) — object etag.
         - LastModified (String) — object last modified GMT date.
         - ContentType (String) — content-type.
+        - ContentLength (String) — content-length.
     - error (Object) — the error object returned from the request. Set to ```null``` if the request is successful.
 
 ### deleteObject(key[, options])
