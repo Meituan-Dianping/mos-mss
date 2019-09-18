@@ -210,6 +210,7 @@ proto.getMeta = async function(ObjectKey, options) {
         data['ETag'] = headers['etag'];
         data['LastModified'] = headers['last-modified'];
         data['ContentType'] = headers['content-type'];
+        data['ContentLength'] = headers['content-length'];
     }
 
     return {
