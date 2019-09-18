@@ -1,0 +1,10 @@
+node_modules
+log
+sample/data/*.json
+test/data/*.json
+npm-debug.log
+coverage/
+.DS_Store
+package-lock.json
+sample/.DS_Store
+src/.DS_Store
