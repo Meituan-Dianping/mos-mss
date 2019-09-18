@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>NotSuchURLSource</Code>
+  <Message>The url source not found, resp status is 404.. Internal Get Cache info failed.</Message>
+  <Resource>Bucket:mos-mss-test-object-bucket,Object:test.json</Resource>
+  <RequestId></RequestId>
+  <HostId></HostId>
+</Error>
