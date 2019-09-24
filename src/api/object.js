@@ -20,8 +20,15 @@ proto.getObject = async function(fileName, file, options) {
     return new Promise(async(resolve) => {
         const writeStream = fs.createWriteStream(file);
 
-        const { stream } = await this.getStream(fileName, options);
-        stream.pipe(writeStream);
+        const { stream, code } = await this.getStream(fileName, options);
+        if (code === 404) {
+            resolve({
+                code: 404,
+                error: 'object key不存在'
+            });
+        } else {
+            stream.pipe(writeStream);
+        }
         stream.on('error', function(err) {
             resolve({
                 code: 500,
