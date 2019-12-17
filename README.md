@@ -31,7 +31,7 @@ var client = new MSS({
     accessKeyId: '<accessKeyId>', /* required */
     accessKeySecret: '<accessKeySecret>', /* required */
     endpoint: '<endpoint>', /* required */
-    bucket: '<bucket name>'
+    bucket: '<bucket name>' /* required */
 })
 
 ```
