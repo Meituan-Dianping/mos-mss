@@ -30,8 +30,8 @@ function createRequest(params) {
         hostname: this.options.endpoint
     });
 
-    //不允许 ?delete= 结束
-    urlPath = urlPath.replace(/(.*)%3Fdelete=/, '$1');
+    //不允许 delete= 结束
+    urlPath = urlPath.replace(/(.*)delete=/, '$1delete');
     let url = urlModel.parse(urlPath);
 
     headers = headers ? headers : {};
