@@ -31,7 +31,7 @@ function createRequest(params) {
     });
 
     //不允许 delete= 结束
-    urlPath = urlPath.replace(/(.*)delete=/, '$1delete');
+    urlPath = urlPath.replace(/(.*)delete=/, '$1delete').replace(/(.*)lifecycle=/, '$1lifecycle');
     let url = urlModel.parse(urlPath);
 
     headers = headers ? headers : {};
