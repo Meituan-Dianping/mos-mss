@@ -30,7 +30,7 @@ function createRequest(params) {
         hostname: this.options.endpoint
     });
 
-    //不允许 delete= 结束
+    //不允许 delete=、lifecycle= 结束
     urlPath = urlPath.replace(/(.*)delete=/, '$1delete').replace(/(.*)lifecycle=/, '$1lifecycle');
     let url = urlModel.parse(urlPath);
 
