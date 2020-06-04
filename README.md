@@ -22,6 +22,9 @@ MSS, Object Storage Service. Equal to well known Amazon [S3](http://aws.amazon.c
 
 Constructs a service object. This object has one method for each API operation.
 
+Refer to [mss API](https://km.sankuai.com/page/58087604)、
+[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.
+
 examples:
 
 ```js
