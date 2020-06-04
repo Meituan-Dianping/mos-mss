@@ -2,7 +2,7 @@ mss-nodejs-sdk
 ======
 
 
-mtyun MSS(Meituan Storage Service) sdk for Node.js
+mtyun [MSS(Meituan Storage Service)](https://www.mtyun.com/doc/api/mss/mss/index) sdk for Node.js
 
 ## install
 
@@ -47,6 +47,8 @@ options:
 
 ## Method Summary
 
+`Refer to [mss API](https://km.sankuai.com/page/58087604)、
+[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.`
 
 - [Bucket Operations](#bucket-operations)
     - [listBucket()](#listbucket)
