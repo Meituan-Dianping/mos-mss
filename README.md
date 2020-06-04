@@ -2,7 +2,7 @@ mss-nodejs-sdk
 ======
 
 
-mtyun MSS(Meituan Storage Service) sdk for Node.js
+mtyun [MSS(Meituan Storage Service)](https://www.mtyun.com/doc/api/mss/mss/index) sdk for Node.js
 
 ## install
 
@@ -21,6 +21,9 @@ MSS, Object Storage Service. Equal to well known Amazon [S3](http://aws.amazon.c
 ## Constructor Details
 
 Constructs a service object. This object has one method for each API operation.
+
+Refer to [mss API](https://km.sankuai.com/page/58087604)、
+[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.
 
 examples:
 
@@ -47,6 +50,8 @@ options:
 
 ## Method Summary
 
+Refer to [mss API](https://km.sankuai.com/page/58087604)、
+[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.
 
 - [Bucket Operations](#bucket-operations)
     - [listBucket()](#listbucket)
