@@ -47,8 +47,8 @@ options:
 
 ## Method Summary
 
-`Refer to [mss API](https://km.sankuai.com/page/58087604)、
-[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.`
+Refer to [mss API](https://km.sankuai.com/page/58087604)、
+[mss-nodejs-sdk / mos-mss API](https://www.mtyun.com/doc/sdk/mss-sdk/node.js/index) for details.
 
 - [Bucket Operations](#bucket-operations)
     - [listBucket()](#listbucket)
