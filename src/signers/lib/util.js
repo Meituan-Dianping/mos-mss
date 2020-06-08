@@ -32,7 +32,7 @@ let util = {
 
     userAgent: function userAgent() {
         let name = util.isBrowser() ? 'js' : 'nodejs';
-        let agent = 'aws-sdk-' + name + '/' + require('./core').VERSION;
+        let agent = 'aws-sdk-' + name + '/';// + require('./core').VERSION;
         if (name === 'nodejs') { agent += ' ' + util.engine(); }
         return agent;
     },
