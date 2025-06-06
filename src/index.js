@@ -9,6 +9,7 @@ const config = require('./config');
 const bucket = require('./api/bucket');
 const object = require('./api/object');
 const multipart = require('./api/multipart');
+const website = require('./api/website');
 
 const debug = debuglog('mos-mss');
 
@@ -91,6 +92,11 @@ merge(proto, object);
  * multipart
  */
 merge(proto, multipart);
+
+/**
+ * website
+*/
+merge(proto, website);
 
 /**
  * other
